@@ -1,2 +1,2 @@
-i= [1, 2]
-print(type(i))
+# i= [1, 2]
+# print(type(i))
