@@ -1,0 +1,52 @@
+//밖으로 떨어지면 돌아오게 해주세요
+const spawnbox = WORLD.getObject("PLANE(439)"); //거의 투명한 막을 바닥 아래에 깜
+//스폰되는 장소보다 y축을 아래로 해야 또잉또잉또잉 안함
+
+spawnbox.onCollide(PLAYER, () => {
+    PLAYER.spawn();
+}); //그 막과 부딪히면 플레이어는 스폰자리로 이동
+//스폰박스(넓은막)이 플레이어와 부딪히면
+//플레이어는 스폰돼쇼
+
+//스타트버튼 누르기전까진 못움직이기, 스타트버튼 누른 후에 게임시작하기
+
+const startButton = GUI.getObject("sf_a_font_a(042)"); //startbutton이라는 걸 명명하겠습니다
+function Start() {
+  PLAYER.changePlayerSpeed(0); //시작 후 플레이어의 속도를 0
+  startButton.onClick(() => { //스타트버튼을 클릭하면
+    startButton.hide(); //스타트버튼은 사라지고
+    PLAYER.changePlayerSpeed(2); //속도를 올립시당
+  });
+}
+
+
+
+//이벤트가 끝나면(박스부딪히기) viclogo와 retrybtn이 뜨고, retrybtn이 생기면, 다시 start창이 뜨도록
+const viclogo = GUI.getObject("casual_a_font_g(681)");
+const startbtn = GUI.getObject("sf_a_font_a(042)");
+const retrybtn = GUI.getObject("button_text_small_blue_retry(d23)");
+const box = WORLD.getObject("vehicle_chariot_002(359)"); //얘네들 명명하기
+
+function Start() { //시작하면
+    viclogo.hide(); //우승 로고 없음
+    retrybtn.hide(); //다시하기 버튼 없음
+    startbtn.hide(); //시작버튼 없음
+
+    // Set up collision detection
+    box.onCollide(PLAYER, () => { //최종 목표인 박스에 플레이어가 부딪히면
+        // Event to trigger when player collides with the box
+        viclogo.show(); //우승로고 보여주고
+        retrybtn.show(); //다시하기버튼 보여주고
+    });
+}
+
+retrybtn.onClick(() => { //다시하기 버튼을 누르면
+    viclogo.hide(); //우승로고 없어지고
+    retrybtn.hide(); //다시하기 버튼 없어지고
+    startbtn.show(); //시작버튼보여주고
+    PLAYER.spawn(); //플레이어는 스폰된다
+});
+
+startbtn.onClick(() => { //스타트버튼 누르면
+    startbtn.hide(); //스타트버튼 없어짐d
+});
