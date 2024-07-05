@@ -48,5 +48,5 @@ retrybtn.onClick(() => { //다시하기 버튼을 누르면
 });
 
 startbtn.onClick(() => { //스타트버튼 누르면
-    startbtn.hide(); //스타트버튼 없어짐
+    startbtn.hide(); //스타트버튼 없어짐d
 });
